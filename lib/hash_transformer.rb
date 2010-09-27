@@ -18,6 +18,10 @@ class HashTransformer
     def map_key(key, to)
       transforms << MapKeyTransform.new(key, to)
     end
+
+    def transform_hash(key, &proc)
+      transforms << HashTransformerTransform.new(key, &proc)
+    end
   end
 
   class DeleteKeyTransform
@@ -49,6 +53,20 @@ class HashTransformer
         h[@to] = v
       end
       h
+    end
+  end
+
+  class HashTransformerTransform
+    attr_reader :key
+    attr_reader :hash_transformer
+
+    def initialize(key, &proc)
+      @key = key
+      @hash_transformer = HashTransformer.new(&proc)
+    end
+
+    def transform(h)
+      h[key] = @hash_transformer.transform(h[key])
     end
   end
 

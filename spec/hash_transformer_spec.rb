@@ -23,4 +23,15 @@ describe "HashTransformer" do
       }.should raise_error(RuntimeError)
     end
   end
+
+  describe "HashTransformerTransform" do
+    it "should transform a hash-valued key" do
+      t = HashTransformer.new do
+        transform_hash :foo do
+          map_key :foofoo, :barbar
+        end
+      end
+      t.transform(:foo=>{:foofoo=>1}).should == {:foo=>{:barbar=>1}}
+    end
+  end
 end
