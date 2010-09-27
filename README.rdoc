@@ -1,6 +1,17 @@
 = hash_transformer
 
-Description goes here.
+create HashTransformers for Hashes with a simple DSL. a HashTransformer
+applies a sequence of transforms to a Hash to produce a new Hash
+
+ require 'hash_transformer'
+ t = HashTransformer.new do
+   delete_key :foo
+   map_key :bar, :baz
+   map_key :foobar, :foobaz
+ end
+
+ t.transform(:foo=>1, :bar=>2, :foobar=>3)
+ => {:baz=>2, :foobaz=>3}
 
 == Note on Patches/Pull Requests
  
@@ -14,4 +25,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2010 mccraigmccraig of the clan mccraig. See LICENSE for details.
+Copyright (c) 2010 Trampoline Systems Ltd. See LICENSE for details.

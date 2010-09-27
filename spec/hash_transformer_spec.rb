@@ -1,7 +1,26 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "HashTransformer" do
-  it "fails" do
-    fail "hey buddy, you should probably rename this file and start specing for real"
+  describe "DeleteKeyTransform" do
+    it "should delete keys" do
+      t = HashTransformer.new{ delete_key(:foo) }
+      t.transform(:foo=>1).should == {}
+      t.transform(:foo=>1, :bar=>2).should == {:bar=>2}
+    end
+  end
+
+  describe "MapKeyTransform" do
+    it "should map keys" do
+      t = HashTransformer.new{ map_key :foo, :bar }
+      t.transform(:foo=>1).should == {:bar=>1}
+      t.transform(:foo=>1, :baz=>2).should == {:bar=>1, :baz=>2}
+    end
+
+    it "should bork if target key exists" do
+      t = HashTransformer.new{ map_key :foo, :bar }
+      lambda {
+        t.transform(:foo=>1, :bar=>2)
+      }.should raise_error(RuntimeError)
+    end
   end
 end
