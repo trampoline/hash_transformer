@@ -8,10 +8,13 @@ applies a sequence of transforms to a Hash to produce a new Hash
    delete_key :foo
    map_key :bar, :baz
    map_key :foobar, :foobaz
+   transform_hash :boo do
+     map_key :foofoo, :barbar
+   end
  end
 
- t.transform(:foo=>1, :bar=>2, :foobar=>3)
- => {:baz=>2, :foobaz=>3}
+ t.transform(:foo=>1, :bar=>2, :foobar=>3, :boo=>{:foofoo=>5})
+ => {:baz=>2, :foobaz=>3, :boo=>{:barbar=>5}}
 
 == Note on Patches/Pull Requests
  
