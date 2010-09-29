@@ -8,7 +8,7 @@ begin
     gem.summary = %Q{create hash transformers with a simple dsl}
     gem.description = %Q{use a dsl to create hash transformers which transform hashes by applying a sequence of transforms}
     gem.email = "mccraigmccraig@gmail.com"
-    gem.homepage = "http://github.com/mccraigmccraig/hash_transformer"
+    gem.homepage = "http://github.com/trampoline/hash_transformer"
     gem.authors = ["mccraigmccraig of the clan mccraig"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
